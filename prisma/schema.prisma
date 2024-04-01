@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model LLM {
+  id        Int       @id @default(sequence())
+  name      String
+  responses Response[]
+  rating    Int       @default(1500)
+}
+
+model Question {
+  id          Int        @id @default(sequence())
+  content     String
+  responses   Response[]
+}
+
+model Response {
+  id          Int      @id @default(sequence())
+  content     String
+  questionId  Int
+  question    Question @relation(fields: [questionId], references: [id])
+  llmId       Int
+  LLM         LLM      @relation(fields: [llmId], references: [id])
+  Winningmatches    Match[]  @relation("LossingResponse")
+  Lossingmatches   Match[]  @relation("winningResponse")
+}
+
+model Match {
+  id            Int      @id @default(sequence())
+  LossingResponse     Response @relation(name: "LossingResponse", fields: [LossingResponseId], references: [id])
+  LossingResponseId   Int
+winningResponse     Response @relation(name: "winningResponse", fields: [winningResponseId], references: [id])
+  winningResponseId      Int
+  createdAt     DateTime @default(now())
+}
