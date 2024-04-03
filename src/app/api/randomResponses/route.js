@@ -10,7 +10,6 @@ export async function GET() {
     // Get a random question
     const totalQuestions = await prisma.question.count();
     const randomQuestionIndex = Math.floor(Math.random() * totalQuestions);
-    console.log(randomQuestionIndex);
     const randomQuestion = await prisma.question.findFirst({
       skip: randomQuestionIndex,
       include: {

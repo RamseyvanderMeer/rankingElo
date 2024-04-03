@@ -9,7 +9,6 @@ export default function Home() {
   const getLlms = async () => {
     const res = await fetch("/api/fetchLLMs");
     const data = await res.json();
-    console.log(data);
     setLlms(data);
   };
 
