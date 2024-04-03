@@ -1,10 +1,11 @@
 // pages/api/randomResponses.js
 import prisma from "../lib/prismaClient";
 
+export const revalidate = 0;
+
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  // set response header so browser doesn't cache response
-  // this is important because we want to fetch a new random question each time
-  Response.setHeader("Cache-Control", "no-store");
   try {
     // Get a random question
     const totalQuestions = await prisma.question.count();
