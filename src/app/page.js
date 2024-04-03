@@ -55,9 +55,7 @@ export default function Home() {
           👑
         </a>
       </button>
-      <h1 className="m-8 text-6xl font-bold">
-        {Math.floor(Math.random() * 10)}
-      </h1>
+      <h1 className="m-8 text-6xl font-bold">Which response is better?</h1>
       {dataReady ? (
         <div>
           <p className="m-16 text-center text-3xl">{question}</p>
