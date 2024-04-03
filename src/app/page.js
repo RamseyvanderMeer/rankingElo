@@ -26,6 +26,8 @@ export default function Home() {
   }, []);
 
   const handleVote = async (winnerResponseId, loserResponseId) => {
+    // get new responses
+    getResponses();
     const res = await fetch("/api/vote", {
       method: "POST",
       headers: {
@@ -33,7 +35,6 @@ export default function Home() {
       },
       body: JSON.stringify({ winnerResponseId, loserResponseId }),
     });
-    getResponses();
   };
 
   return (
