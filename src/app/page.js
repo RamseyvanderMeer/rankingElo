@@ -10,7 +10,8 @@ export default function Home() {
   const [dataReady, setDataReady] = useState(false);
 
   const getResponses = async () => {
-    const res = await fetch("/api/randomResponses");
+    // don't cache the response
+    const res = await fetch("/api/randomResponses", { cache: "no-store" });
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error("Failed to fetch data");
